@@ -1,0 +1,457 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>简述JS异步函数 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="jsAsync.html">
+            
+                <a href="jsAsync.html">
+            
+                    
+                    简述JS异步函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >简述JS异步函数</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B80;&#x8FF0;js&#x5F02;&#x6B65;&#x51FD;&#x6570;">&#x7B80;&#x8FF0;JS&#x5F02;&#x6B65;&#x51FD;&#x6570;</h1>
+<hr>
+<p><strong>&#x5148;&#x6765;&#x8BF4;&#x8BF4;JS&#x7684;&#x8FD0;&#x884C;&#x673A;&#x5236;</strong></p>
+<p>-&#x5355;&#x7EBF;&#x7A0B;</p>
+<p><strong>&#x90A3;&#x4E48;&#x95EE;&#x9898;&#x6765;&#x4E86;</strong></p>
+<p>-&#x5355;&#x7EBF;&#x7A0B;&#x5982;&#x4F55;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x3001;&#x6587;&#x4EF6;&#x8BFB;&#x5199;&#x7B49;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#xFF1F;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#xFF1F;&#x90A3;&#x5C82;&#x4E0D;&#x662F;&#x8981;&#x7B49;&#x5230;&#x7334;&#x5E74;&#x9A6C;&#x6708;&#xFF1F;</p>
+<p><strong>&#x6709;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5417;&#xFF1F;</strong></p>
+<p>-&#x6709;&#xFF01;JavaScript &#x5F02;&#x6B65;&#x673A;&#x5236;&#x3002;</p>
+<p><strong>&#x5148;&#x6765;&#x8BF4;&#x8BF4;&#x540C;&#x6B65;&#x3001;&#x5F02;&#x6B65;</strong></p>
+<p><img src="../images/jsAsync1.png" alt="&#x540C;&#x6B65;&#x5F02;&#x6B65;"></p>
+<p>&#x4F9D;&#x636E;&#x5FAE;&#x8F6F;&#x7684; MSDN &#x4E0A;&#x7684;&#x89E3;&#x8BF4;</p>
+<p>-&#x540C;&#x6B65;</p>
+<p><code>&#x5F53;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x540C;&#x6B65;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x8BE5;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#x4E0D;&#x4F1A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x76F4;&#x5230;&#x8BE5;&#x51FD;&#x6570;&#x6240;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x5168;&#x90FD;&#x505A;&#x5B8C;&#x4E86;&#x624D;&#x8FD4;&#x56DE;&#x3002;</code></p>
+<p>&#x5982;&#xFF1A;</p>
+<pre><code class="lang-js">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">const</span> b = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">const</span> c = a + b;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c&quot;</span>,c);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;&#x6253;&#x5370;&#x51FA;&#x6765;&apos;</span>)<span class="hljs-comment">//&#x53EA;&#x6709;&#x5F53;&#x4E0A;&#x9762;&#x7684;&#x90FD;&#x8FD0;&#x884C;&#x5B8C;&#x4E4B;&#x540E;&#xFF0C;&#x6700;&#x540E;&#x624D;&#x4F1A;&#x6253;&#x5370;&#x51FA;&#x8FD9;&#x6BB5;</span>
+}())
+</code></pre>
+<p>-&#x5F02;&#x6B65;</p>
+<p><code>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x4F1A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x5C3D;&#x7BA1;&#x8BE5;&#x51FD;&#x6570;&#x89C4;&#x5B9A;&#x7684;&#x64CD;&#x4F5C;&#x4EFB;&#x52A1;&#x8FD8;&#x6CA1;&#x6709;&#x5B8C;&#x6210;&#x3002;</code></p>
+<p>&#x5982;&#xFF1A;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">async</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&#x79D2;&#x540E;&#x624D;&#x4F1A;&#x6253;&#x5370;&quot;</span>)
+}
+
+setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hljs-number">2000</span>)
+</code></pre>
+<p>JS&#x7684;&#x5F02;&#x6B65;&#x5904;&#x7406;&#xFF0C;&#x5927;&#x591A;&#x90FD;&#x662F;&#x5229;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;&#x57FA;&#x672C;&#x7C7B;&#x4F3C;&#x4E8E;&#xFF1A;</p>
+<pre><code class="lang-js">getAsync(<span class="hljs-string">&quot;something&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, result</span>)</span>{
+    <span class="hljs-keyword">if</span>(error){<span class="hljs-comment">// &#x53D6;&#x5F97;&#x5931;&#x8D25;&#x65F6;&#x7684;&#x5904;&#x7406;</span>
+        <span class="hljs-keyword">throw</span> error;
+    }
+    <span class="hljs-comment">// &#x53D6;&#x5F97;&#x6210;&#x529F;&#x65F6;&#x7684;&#x5904;&#x7406;</span>
+});
+</code></pre>
+<p>&#x4F46;&#x8FD9;&#x4E5F;&#x53EA;&#x662F;&#x4E00;&#x79CD;&#xFF0C;&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x5957;&#x81EA;&#x5DF1;&#x7684;&#x89C4;&#x5219;&#x548C;&#x89C4;&#x8303;&#x3002;&#x800C;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x662F; JS &#x91CC;&#x5F88;&#x5E38;&#x7528;&#x7684;&#x5904;&#x7406;&#x673A;&#x5236;&#x3002;&#x4E3A;&#x4E86;&#x89C4;&#x8303;&#x5316;&#xFF0C;ES6 &#x91CC;&#x65B0;&#x589E;&#x4E86; Promise &#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>Promise</strong></p>
+<p>-Promise &#x662F;&#x62BD;&#x8C61;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x5BF9;&#x8C61;&#x4EE5;&#x53CA;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x5404;&#x79CD;&#x64CD;&#x4F5C;&#x7684;&#x7EC4;&#x4EF6;&#x3002;</p>
+<p>-<code>&#xFF08;&#x6587;&#x6848;&#x7248;,&#x5F15;&#x81EA;&#x7F51;&#x53CB;&#xFF09;</code>Promise &#x662F;&#x4E00;&#x4E2A;&#x7F8E;&#x597D;&#x7684;&#x627F;&#x8BFA;&#xFF0C;&#x627F;&#x8BFA;&#x672C;&#x8EAB;&#x4F1A;&#x505A;&#x51FA;&#x6B63;&#x786E;&#x5EF6;&#x65F6;&#x6216;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x3002;&#x627F;&#x8BFA;&#x4F1A;&#x89E3;&#x51B3; callback &#x5904;&#x7406;&#x5F02;&#x6B65;&#x56DE;&#x8C03;&#x53EF;&#x80FD;&#x4EA7;&#x751F;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x65E9;&#xFF0C;&#x8C03;&#x7528;&#x8FC7;&#x665A;&#x3001;&#x8C03;&#x7528;&#x6B21;&#x6570;&#x8FC7;&#x591A;&#x8FC7;&#x5C11;&#x3001;&#x541E;&#x6389;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x6216;&#x5F02;&#x5E38;&#x95EE;&#x9898;&#x7B49;&#x3002;&#x53E6;&#x5916;&#x627F;&#x8BFA;&#x53EA;&#x63A5;&#x53D7;<strong><em>&#x9996;&#x6B21;</em></strong> resolve(..) &#x6216; reject(..) &#x51B3;&#x8BAE;&#xFF0C;&#x627F;&#x8BFA;&#x672C;&#x8EAB;&#x72B6;&#x6001;&#x8F6C;&#x53D8;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x53D8;&#xFF0C;&#x627F;&#x8BFA;&#x6240;&#x6709;&#x901A;&#x8FC7; then(..) &#x6CE8;&#x518C;&#x7684;&#x56DE;&#x8C03;&#x603B;&#x662F;&#x4F9D;&#x6B21;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#xFF0C;&#x627F;&#x8BFA;&#x6240;&#x6709;&#x5F02;&#x5E38;&#x603B;&#x4F1A;&#x88AB;&#x6355;&#x83B7;&#x629B;&#x51FA;&#x3002;&#x5979;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4FE1;&#x4EFB;&#x7684;&#x627F;&#x8BFA;&#x3002;</p>
+<p>Promise&#x4E2D;&#x6709;&#x51E0;&#x4E2A;&#x72B6;&#x6001;&#xFF1A;</p>
+<ul>
+<li>pending: &#x521D;&#x59CB;&#x72B6;&#x6001;, &#x975E; fulfilled &#x6216; rejected&#xFF1B;</li>
+<li>fulfilled: &#x6210;&#x529F;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4E3A;&#x8868;&#x8FF0;&#x65B9;&#x4FBF;&#xFF0C;fulfilled &#x4F7F;&#x7528; resolved &#x4EE3;&#x66FF;&#xFF1B;</li>
+<li>rejected: &#x5931;&#x8D25;&#x7684;&#x64CD;&#x4F5C;&#x3002;</li>
+</ul>
+<p><img src="../images/jsAsync2.png" alt="promise"></p>
+<p>&#x5728; ES6 Promises &#x6807;&#x51C6;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;API&#x8FD8;&#x4E0D;&#x662F;&#x5F88;&#x591A;&#xFF0C;&#x76EE;&#x524D;&#x5927;&#x81F4;&#x6709;&#x4E0B;&#x9762;&#x4E09;&#x79CD;&#x7C7B;&#x578B;&#xFF1A;</p>
+<blockquote>
+<p>Constructor</p>
+<blockquote>
+<p>Promise &#x7C7B;&#x4F3C;&#x4E8E; <code>XMLHttpRequest</code>&#xFF0C;&#x4ECE;&#x6784;&#x9020;&#x51FD;&#x6570; <code>Promise</code> &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x5EFA;&#x65B0; <code>promise</code> &#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;&#x63A5;&#x53E3;&#x3002;
+&#x8981;&#x60F3;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; <code>promise</code> &#x5BF9;&#x8C61;&#x3001;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>new</code> &#x6765;&#x8C03;&#x7528; <code>Promise</code> &#x7684;&#x6784;&#x9020;&#x5668;&#x6765;&#x8FDB;&#x884C;&#x5B9E;&#x4F8B;&#x5316;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+    <span class="hljs-comment">// &#x5F02;&#x6B65;&#x5904;&#x7406;</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* &#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x6210;&#x529F; */</span>){
+    <span class="hljs-comment">// &#x5904;&#x7406;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x6210;&#x529F;&#x8C03;&#x7528;resolve </span>
+        resolve(value);
+      } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">//&#x5931;&#x8D25;&#x8C03;&#x7528;reject</span>
+        reject(error);
+      }
+});
+</code></pre>
+</blockquote>
+<p>Instance Method</p>
+<blockquote>
+<p>&#x5BF9;&#x901A;&#x8FC7; <code>new</code> &#x751F;&#x6210;&#x7684; <code>promise</code> &#x5BF9;&#x8C61;&#x4E3A;&#x4E86;&#x8BBE;&#x7F6E;&#x5176;&#x503C;&#x5728; <code>resolve</code> (&#x6210;&#x529F;) /  <code>reject</code> (&#x5931;&#x8D25;)&#x65F6;&#x8C03;&#x7528;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>promise.then()</code>  &#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x3002;&#x4E00;&#x4E2A; <code>promise</code> &#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x591A;&#x4E2A; <code>then</code> &#x65B9;&#x6CD5;&#xFF0C;&#x6BCF;&#x6B21;&#x8FD4;&#x56DE;&#x65B0;&#x7684; <code>promise</code> &#x7684;&#x5BF9;&#x8C61;&#x3002;</p>
+<pre><code class="lang-js">promise.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-comment">// success&#x65F6;&#x7684;&#x5904;&#x7406;</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+  <span class="hljs-comment">// failure&#x65F6;&#x7684;&#x5904;&#x7406;</span>
+});
+</code></pre>
+<p>&#x5F53;&#x5931;&#x8D25;&#x65F6;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;<code>promise.catch(function(error){})</code> &#x83B7;&#x53D6;&#x9519;&#x8BEF;&#x5E76;&#x5904;&#x7406;&#x9519;&#x8BEF;&#x3002;
+&#x5728; ES9 &#x91CC;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x65B9;&#x6CD5;<code>promise.finally(function(){})</code> &#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x4E0D;&#x7BA1; <code>Promise</code> &#x5BF9;&#x8C61;&#x6700;&#x540E;&#x72B6;&#x6001;&#x5982;&#x4F55;&#xFF0C;&#x90FD;&#x4F1A;&#x6267;&#x884C;&#x6B64;&#x64CD;&#x4F5C;&#x3002;</p>
+</blockquote>
+<p>Static Method</p>
+<blockquote>
+<p>&#x50CF; <code>Promise</code> &#x8FD9;&#x6837;&#x7684;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x8FD8;&#x62E5;&#x6709;&#x4E00;&#x4E9B;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x3002;
+&#x5305;&#x62EC; <code>Promise.all()</code><sup><a href="#fn_1" id="reffn_1">1</a></sup> &#x8FD8;&#x6709;  <code>Promise.race()</code><sup><a href="#fn_2" id="reffn_2">2</a></sup> &#x7B49;&#x5728;&#x5185;&#xFF0C;&#x4E3B;&#x8981;&#x90FD;&#x662F;&#x4E00;&#x4E9B;&#x5BF9; <code>Promise</code> &#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x8F85;&#x52A9;&#x65B9;&#x6CD5;&#x3002;</p>
+</blockquote>
+</blockquote>
+<p><strong>Promise</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> timeOut = (ms, promise) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+    <span class="hljs-keyword">const</span> timeoutId = setTimeout(() =&gt; {
+      reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;&#x8D85;&#x65F6;&#x5566;~~&quot;</span>))
+    }, ms)
+    promise.then(
+      res =&gt; {
+        clearTimeout(timeoutId)
+        resolve(res)
+      },
+      err =&gt; {
+        clearTimeout(timeoutId)
+        reject(err)
+      }
+    )
+  })
+}
+
+<span class="hljs-keyword">const</span> onTime = () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve) =&gt; {
+    setTimeout(() =&gt; {
+        resolve(<span class="hljs-string">&quot;0s&#x5B8C;&#x6210;&#x4E86;&quot;</span>)
+    },<span class="hljs-number">0</span>)
+})
+
+<span class="hljs-keyword">const</span> outTime = () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve) =&gt; {
+    setTimeout(() =&gt; {
+        resolve(<span class="hljs-string">&quot;2000s&#x5B8C;&#x6210;&#x4E86;&quot;</span>)
+    },<span class="hljs-number">2000</span>)
+})
+
+<span class="hljs-keyword">const</span> testOnTime = () =&gt; {
+    <span class="hljs-keyword">return</span> timeOut(<span class="hljs-number">1000</span>,onTime())
+        .then(res =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+        })
+        .catch(err =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+        })
+}
+
+<span class="hljs-keyword">const</span> testOutTime = () =&gt; {
+    <span class="hljs-keyword">return</span> timeOut(<span class="hljs-number">1000</span>,outTime())
+        .then(res =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+        })
+        .catch(err =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+        })
+}
+
+<span class="hljs-comment">//&#x5229;&#x7528;Promise.race()&#x6539;&#x5199;&#x6B64;&#x65B9;&#x6CD5;</span>
+<span class="hljs-keyword">const</span> timeOutRace = (ms) =&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+      <span class="hljs-keyword">const</span> timeoutId = setTimeout(() =&gt; {
+        reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;&#x8D85;&#x65F6;&#x5566;~~&quot;</span>))
+      }, ms)
+    })
+}
+
+<span class="hljs-keyword">const</span> testOnTimeRace = () =&gt; {
+    <span class="hljs-keyword">const</span> p1 = timeOutRace(<span class="hljs-number">1000</span>);
+    <span class="hljs-keyword">const</span> p2 = onTime();
+    <span class="hljs-built_in">Promise</span>.race([p1,p2]).then(result =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;result&quot;</span>,result)
+    }).catch(error =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;error&quot;</span>,error)
+    })
+}
+
+<span class="hljs-keyword">const</span> testOutTimeRace = () =&gt; {
+    <span class="hljs-keyword">const</span> p1 = timeOutRace(<span class="hljs-number">1000</span>);
+    <span class="hljs-keyword">const</span> p2 = outTime();
+    <span class="hljs-built_in">Promise</span>.race([p1,p2]).then(result =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;result&quot;</span>,result)
+    }).catch(error =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;error&quot;</span>,error)
+    })
+}
+
+<span class="hljs-comment">//Promise.all()</span>
+<span class="hljs-keyword">const</span> showAll1 = () =&gt; {
+    <span class="hljs-keyword">const</span> p1 = onTime();
+    <span class="hljs-keyword">const</span> p2 = outTime();
+    <span class="hljs-built_in">Promise</span>.all([p1,p2]).then(res =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+    }).catch(err =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+    })
+}
+
+<span class="hljs-keyword">const</span> showAll2 = () =&gt; {
+    <span class="hljs-keyword">const</span> p1 = onTime();
+    <span class="hljs-keyword">const</span> p2 = outTime();
+    <span class="hljs-keyword">const</span> p3 = timeOutRace(<span class="hljs-number">1000</span>);
+    <span class="hljs-built_in">Promise</span>.all([p1,p2,p3]).then(res =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+    }).catch(err =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+    })
+}
+</code></pre>
+<p><strong> Async/Await</strong></p>
+<p>ES8 &#x6807;&#x51C6;&#x5F15;&#x5165;&#x4E86; async &#x51FD;&#x6570;&#xFF0C;&#x4F7F;&#x5F97;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x65B9;&#x4FBF;&#xFF0C;&#x7C7B;&#x4F3C;&#x540C;&#x6B65;&#x7684;&#x5199;&#x6CD5;&#x3002;&#x5355;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#x5728;&#x7406;&#x89E3;&#x4E0A;&#x5E76;&#x4E0D;&#x5982; Promise &#x3002;
+async &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Promise &#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; then &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;&#x5F53;&#x51FD;&#x6570;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E00;&#x65E6;&#x9047;&#x5230; await &#x5C31;&#x4F1A;&#x5148;&#x8FD4;&#x56DE;&#xFF0C;&#x7B49;&#x5230;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#xFF0C;&#x518D;&#x63A5;&#x7740;&#x6267;&#x884C;&#x51FD;&#x6570;&#x4F53;&#x5185;&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> testAsyncOnTime = <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> timeOut(<span class="hljs-number">1000</span>,onTime())
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+    }<span class="hljs-keyword">catch</span>(err){
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+    }
+}
+
+<span class="hljs-keyword">const</span> testAsyncOutTime = <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> timeOut(<span class="hljs-number">1000</span>,outTime())
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
+    }<span class="hljs-keyword">catch</span>(err){
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;err&quot;</span>,err)
+    }
+}
+</code></pre>
+<blockquote id="fn_1">
+<sup>1</sup>.    Promise.all &#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5C06;&#x591A;&#x4E2A; Promise &#x5B9E;&#x4F8B;&#xFF0C;&#x5305;&#x88C5;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Promise &#x5B9E;&#x4F8B;&#x3002;<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#x21A9;</a>
+</blockquote>
+<pre><code>&#x6210;&#x529F;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x3002;
+&#x5931;&#x8D25;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x6700;&#x5148;&#x88AB; reject &#x7684;&#x72B6;&#x6001;&#x503C;&#x3002;
+</code></pre><blockquote id="fn_2">
+<sup>2</sup>.    Promise.race &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x6700;&#x5148;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x65E0;&#x8BBA;&#x6210;&#x529F;&#x8FD8;&#x662F;&#x5931;&#x8D25;&#x3002;<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#x21A9;</a>
+</blockquote>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../../" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"简述JS异步函数","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"books/pages/jsAsync.md","mtime":"2019-05-16T03:34:47.999Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-16T03:09:27.325Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
