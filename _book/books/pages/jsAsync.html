@@ -190,14 +190,14 @@
 setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hljs-number">2000</span>)
 </code></pre>
 <p>JS&#x7684;&#x5F02;&#x6B65;&#x5904;&#x7406;&#xFF0C;&#x5927;&#x591A;&#x90FD;&#x662F;&#x5229;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;&#x57FA;&#x672C;&#x7C7B;&#x4F3C;&#x4E8E;&#xFF1A;</p>
-<pre><code class="lang-js">getAsync(<span class="hljs-string">&quot;something&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, result</span>)</span>{
-    <span class="hljs-keyword">if</span>(error){<span class="hljs-comment">// &#x53D6;&#x5F97;&#x5931;&#x8D25;&#x65F6;&#x7684;&#x5904;&#x7406;</span>
-        <span class="hljs-keyword">throw</span> error;
-    }
-    <span class="hljs-comment">// &#x53D6;&#x5F97;&#x6210;&#x529F;&#x65F6;&#x7684;&#x5904;&#x7406;</span>
-});
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAsync</span>(<span class="hljs-params">callback</span>) </span>{
+    setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+&#x3000;&#x3000;&#x3000;&#x3000;<span class="hljs-comment">// todo...</span>
+&#x3000;&#x3000;&#x3000;&#x3000;callback();
+&#x3000;&#x3000;}, <span class="hljs-number">1000</span>);
+};
 </code></pre>
-<p>&#x4F46;&#x8FD9;&#x4E5F;&#x53EA;&#x662F;&#x4E00;&#x79CD;&#xFF0C;&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x5957;&#x81EA;&#x5DF1;&#x7684;&#x89C4;&#x5219;&#x548C;&#x89C4;&#x8303;&#x3002;&#x800C;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x662F; JS &#x91CC;&#x5F88;&#x5E38;&#x7528;&#x7684;&#x5904;&#x7406;&#x673A;&#x5236;&#x3002;&#x4E3A;&#x4E86;&#x89C4;&#x8303;&#x5316;&#xFF0C;ES6 &#x91CC;&#x65B0;&#x589E;&#x4E86; Promise &#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x4F46;&#x8FD9;&#x4E5F;&#x53EA;&#x662F;&#x4E00;&#x79CD;&#x3002;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x8FD8;&#x6709;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x3001;&#x53D1;&#x5E03;/&#x8BA2;&#x9605;&#x7B49;&#x3002;&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x5957;&#x81EA;&#x5DF1;&#x7684;&#x89C4;&#x5219;&#x548C;&#x89C4;&#x8303;&#xFF0C;&#x5E76;&#x4E14;&#x5F02;&#x6B65;&#x4EE3;&#x7801;&#x5927;&#x90FD;&#x5C42;&#x5C42;&#x5D4C;&#x5957;&#xFF0C;&#x4E0D;&#x597D;&#x7406;&#x89E3;&#x3002;&#x800C;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x662F; JS &#x91CC;&#x5F88;&#x5E38;&#x7528;&#x7684;&#x5904;&#x7406;&#x673A;&#x5236;&#x3002;&#x4E3A;&#x4E86;&#x89C4;&#x8303;&#x5316;&#xFF0C;ES6 &#x91CC;&#x65B0;&#x589E;&#x4E86; Promise &#x5BF9;&#x8C61;&#x3002;</p>
 <p><strong>Promise</strong></p>
 <p>-Promise &#x662F;&#x62BD;&#x8C61;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x5BF9;&#x8C61;&#x4EE5;&#x53CA;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x5404;&#x79CD;&#x64CD;&#x4F5C;&#x7684;&#x7EC4;&#x4EF6;&#x3002;</p>
 <p>-<code>&#xFF08;&#x6587;&#x6848;&#x7248;,&#x5F15;&#x81EA;&#x7F51;&#x53CB;&#xFF09;</code>Promise &#x662F;&#x4E00;&#x4E2A;&#x7F8E;&#x597D;&#x7684;&#x627F;&#x8BFA;&#xFF0C;&#x627F;&#x8BFA;&#x672C;&#x8EAB;&#x4F1A;&#x505A;&#x51FA;&#x6B63;&#x786E;&#x5EF6;&#x65F6;&#x6216;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x3002;&#x627F;&#x8BFA;&#x4F1A;&#x89E3;&#x51B3; callback &#x5904;&#x7406;&#x5F02;&#x6B65;&#x56DE;&#x8C03;&#x53EF;&#x80FD;&#x4EA7;&#x751F;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x65E9;&#xFF0C;&#x8C03;&#x7528;&#x8FC7;&#x665A;&#x3001;&#x8C03;&#x7528;&#x6B21;&#x6570;&#x8FC7;&#x591A;&#x8FC7;&#x5C11;&#x3001;&#x541E;&#x6389;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x6216;&#x5F02;&#x5E38;&#x95EE;&#x9898;&#x7B49;&#x3002;&#x53E6;&#x5916;&#x627F;&#x8BFA;&#x53EA;&#x63A5;&#x53D7;<strong><em>&#x9996;&#x6B21;</em></strong> resolve(..) &#x6216; reject(..) &#x51B3;&#x8BAE;&#xFF0C;&#x627F;&#x8BFA;&#x672C;&#x8EAB;&#x72B6;&#x6001;&#x8F6C;&#x53D8;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x53D8;&#xFF0C;&#x627F;&#x8BFA;&#x6240;&#x6709;&#x901A;&#x8FC7; then(..) &#x6CE8;&#x518C;&#x7684;&#x56DE;&#x8C03;&#x603B;&#x662F;&#x4F9D;&#x6B21;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#xFF0C;&#x627F;&#x8BFA;&#x6240;&#x6709;&#x5F02;&#x5E38;&#x603B;&#x4F1A;&#x88AB;&#x6355;&#x83B7;&#x629B;&#x51FA;&#x3002;&#x5979;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4FE1;&#x4EFB;&#x7684;&#x627F;&#x8BFA;&#x3002;</p>
@@ -245,7 +245,10 @@ setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hlj
 </blockquote>
 </blockquote>
 <p><strong>Promise</strong></p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> timeOut = (ms, promise) =&gt; {
+<pre><code class="lang-js"><span class="hljs-comment">//&#x6B64;&#x51FD;&#x6570;&#x4F20;&#x5165;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x65F6;&#x95F4;&#xFF0C;promise &#x51FD;&#x6570;</span>
+<span class="hljs-comment">//&#x6B64;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x5224;&#x65AD;&#x8C03;&#x7528;&#x7684; promise &#x51FD;&#x6570;&#x662F;&#x5426;&#x8D85;&#x65F6;&#x3002;</span>
+<span class="hljs-comment">//&#x56E0;&#x4E3A; promise &#x53EA;&#x4F1A;&#x8FD4;&#x56DE;&#x9996;&#x6B21;&#x72B6;&#x6001;&#xFF0C;&#x4E00;&#x65E6;&#x72B6;&#x6001;&#x786E;&#x5B9A;&#x540E;&#xFF0C;&#x4E4B;&#x540E;&#x4FBF;&#x4E0D;&#x4F1A;&#x518D;&#x53D8;&#x3002;</span>
+<span class="hljs-keyword">const</span> timeOut = (ms, promise) =&gt; {
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
     <span class="hljs-keyword">const</span> timeoutId = setTimeout(() =&gt; {
       reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;&#x8D85;&#x65F6;&#x5566;~~&quot;</span>))
@@ -263,12 +266,14 @@ setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hlj
   })
 }
 
+<span class="hljs-comment">//&#x8FD9;&#x662F;&#x4E00;&#x4E2A;0s&#x4E4B;&#x540E;&#x8FD4;&#x56DE;&#x7684; promise &#x51FD;&#x6570;</span>
 <span class="hljs-keyword">const</span> onTime = () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve) =&gt; {
     setTimeout(() =&gt; {
         resolve(<span class="hljs-string">&quot;0s&#x5B8C;&#x6210;&#x4E86;&quot;</span>)
     },<span class="hljs-number">0</span>)
 })
 
+<span class="hljs-comment">//&#x8FD9;&#x662F;&#x4E00;&#x4E2A;2s&#x4E4B;&#x540E;&#x8FD4;&#x56DE;&#x7684; promise &#x51FD;&#x6570;</span>
 <span class="hljs-keyword">const</span> outTime = () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve) =&gt; {
     setTimeout(() =&gt; {
         resolve(<span class="hljs-string">&quot;2000s&#x5B8C;&#x6210;&#x4E86;&quot;</span>)
@@ -276,6 +281,7 @@ setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hlj
 })
 
 <span class="hljs-keyword">const</span> testOnTime = () =&gt; {
+    <span class="hljs-comment">//&#x8FD9;&#x91CC;&#x8C03;&#x7528;&#x4E86; timeOut &#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1s&#xFF0C;&#x4F20;&#x5165; onTime &#x51FD;&#x6570;</span>
     <span class="hljs-keyword">return</span> timeOut(<span class="hljs-number">1000</span>,onTime())
         .then(res =&gt; {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
@@ -285,7 +291,13 @@ setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hlj
         })
 }
 
+<span class="hljs-comment">//&#x8FD0;&#x884C;</span>
+testOnTime()
+<span class="hljs-comment">//&#x6253;&#x5370;&#x7ED3;&#x679C;&#x4E3A;:res 0s&#x5B8C;&#x6210;&#x4E86;</span>
+<span class="hljs-comment">//&#x56E0;&#x4E3A;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1s,&#x800C; onTime &#x5219;&#x5728;0s&#x4E4B;&#x540E;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x6709;&#x8D85;&#x65F6;&#x3002;</span>
+
 <span class="hljs-keyword">const</span> testOutTime = () =&gt; {
+    <span class="hljs-comment">//&#x8FD9;&#x91CC;&#x8C03;&#x7528;&#x4E86; timeOut &#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1s&#xFF0C;&#x4F20;&#x5165; outTime &#x51FD;&#x6570;</span>
     <span class="hljs-keyword">return</span> timeOut(<span class="hljs-number">1000</span>,outTime())
         .then(res =&gt; {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;res&quot;</span>,res)
@@ -295,7 +307,12 @@ setTimeout(<span class="hljs-string">&quot;async()&quot;</span>,<span class="hlj
         })
 }
 
-<span class="hljs-comment">//&#x5229;&#x7528;Promise.race()&#x6539;&#x5199;&#x6B64;&#x65B9;&#x6CD5;</span>
+<span class="hljs-comment">//&#x8FD0;&#x884C;</span>
+testOutTime()
+<span class="hljs-comment">//&#x6253;&#x5370;&#x7ED3;&#x679C;&#x4E3A;:err Error: &#x8D85;&#x65F6;&#x5566;~~</span>
+<span class="hljs-comment">//&#x56E0;&#x4E3A;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1s,&#x800C; onTime &#x5219;&#x5728;2s&#x4E4B;&#x540E;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x4E0D;&#x80FD;&#x5728;1s&#x5185;&#x8FD4;&#x56DE;&#xFF0C;&#x6240;&#x4EE5;&#x8D85;&#x65F6;&#x3002;</span>
+
+<span class="hljs-comment">//&#x5229;&#x7528;Promise.race()&#x6539;&#x5199; testOnTime &#x548C; testOutTime &#x65B9;&#x6CD5;</span>
 <span class="hljs-keyword">const</span> timeOutRace = (ms) =&gt; {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
       <span class="hljs-keyword">const</span> timeoutId = setTimeout(() =&gt; {
@@ -414,7 +431,7 @@ async &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Promise &#x5BF9;&#x8C61;&
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"简述JS异步函数","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"books/pages/jsAsync.md","mtime":"2019-05-16T03:34:47.999Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-16T03:09:27.325Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"简述JS异步函数","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"books/pages/jsAsync.md","mtime":"2019-05-20T06:22:45.034Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-20T06:03:32.345Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

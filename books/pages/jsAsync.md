@@ -49,15 +49,15 @@ setTimeout("async()",2000)
 
 JS的异步处理，大多都是利用回调函数。基本类似于：
 ```js
-getAsync("something", function(error, result){
-    if(error){// 取得失败时的处理
-        throw error;
-    }
-    // 取得成功时的处理
-});
+function getAsync(callback) {
+	setTimeout(function () {
+　　　　// todo...
+　　　　callback();
+　　}, 1000);
+};
 ```
 
-但这也只是一种，每个人都可以定义一套自己的规则和规范。而异步处理是 JS 里很常用的处理机制。为了规范化，ES6 里新增了 Promise 对象。
+但这也只是一种。其他类型还有事件监听、发布/订阅等。每个人都可以定义一套自己的规则和规范，并且异步代码大都层层嵌套，不好理解。而异步处理是 JS 里很常用的处理机制。为了规范化，ES6 里新增了 Promise 对象。
 
 **Promise**
 
@@ -110,6 +110,9 @@ Promise中有几个状态：
 
 **Promise**
 ```js
+//此函数传入两个参数：时间，promise 函数
+//此函数作用判断调用的 promise 函数是否超时。
+//因为 promise 只会返回首次状态，一旦状态确定后，之后便不会再变。
 const timeOut = (ms, promise) => {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(() => {
@@ -128,12 +131,14 @@ const timeOut = (ms, promise) => {
   })
 }
 
+//这是一个0s之后返回的 promise 函数
 const onTime = () => new Promise((resolve) => {
 	setTimeout(() => {
 		resolve("0s完成了")
 	},0)
 })
 
+//这是一个2s之后返回的 promise 函数
 const outTime = () => new Promise((resolve) => {
 	setTimeout(() => {
 		resolve("2000s完成了")
@@ -141,6 +146,7 @@ const outTime = () => new Promise((resolve) => {
 })
 
 const testOnTime = () => {
+	//这里调用了 timeOut 函数，并设置超时时间为1s，传入 onTime 函数
 	return timeOut(1000,onTime())
 		.then(res => {
 			console.log("res",res)
@@ -150,7 +156,13 @@ const testOnTime = () => {
 		})
 }
 
+//运行
+testOnTime()
+//打印结果为:res 0s完成了
+//因为超时时间为1s,而 onTime 则在0s之后即返回，所以没有超时。
+
 const testOutTime = () => {
+	//这里调用了 timeOut 函数，并设置超时时间为1s，传入 outTime 函数
 	return timeOut(1000,outTime())
 		.then(res => {
 			console.log("res",res)
@@ -160,7 +172,12 @@ const testOutTime = () => {
 		})
 }
 
-//利用Promise.race()改写此方法
+//运行
+testOutTime()
+//打印结果为:err Error: 超时啦~~
+//因为超时时间为1s,而 onTime 则在2s之后即返回，不能在1s内返回，所以超时。
+
+//利用Promise.race()改写 testOnTime 和 testOutTime 方法
 const timeOutRace = (ms) => {
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
